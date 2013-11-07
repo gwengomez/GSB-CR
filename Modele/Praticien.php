@@ -2,10 +2,10 @@
 
 require_once 'Framework/Modele.php';
 
-// Services métier liés aux médicaments 
+// Services métier liés aux praticiens 
 class Praticien extends Modele {
     
-    // Morceau de requête SQL incluant les champs de la table médicament
+    // Morceau de requête SQL incluant les champs de la table praticien
     private $sqlPraticien = "SELECT id_praticien as idPraticien, lib_type_praticien as typePraticien, nom_praticien as nomPraticien, prenom_praticien as prenomPraticien, adresse_praticien as adressePraticien, cp_praticien as cpPraticien, ville_praticien as villePraticien, coef_notoriete as coefNotoriete FROM praticien P JOIN type_praticien TP ON P.id_type_praticien = TP.id_type_praticien ";
     
     public function getPraticiens() {
@@ -14,7 +14,7 @@ class Praticien extends Modele {
         return $praticiens;
     }
     
-    // Renvoie un médicament à partir de son identifiant
+    // Renvoie un praticien à partir de son identifiant
     public function getPraticien($idPraticien) {
         $sql = $this->sqlPraticien . 'where P.id_praticien=?';
         $praticien = $this->executerRequete($sql, array($idPraticien));
