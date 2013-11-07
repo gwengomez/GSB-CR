@@ -34,6 +34,12 @@ class ControleurPraticiens extends Controleur {
         $praticiens = $this->praticien->getPraticiens();
         $this->genererVue(array('praticiens' => $praticiens));
     }
+    
+    // Affiche l'interface de recherche de praticien avancée
+    public function rechercheAvancee() {
+        $praticiens = $this->praticien->getTypesPraticien();
+        $this->genererVue(array('praticiens' => $praticiens));
+    }
 
     // Affiche le résultat de la recherche de praticien
     public function resultat() {
@@ -45,9 +51,23 @@ class ControleurPraticiens extends Controleur {
             throw new Exception("Action impossible : aucun praticien défini");
     }
     
+    public function resultatType() {
+        if ($this->requete->existeParametre("id")) {
+            $idPraticien = $this->requete->getParametre("id");
+            $this->afficherPraticiensType($idTypePraticien);
+        }
+        else
+            throw new Exception("Action impossible : aucun type de praticien défini");
+    }
+    
     // Affiche les détails sur un praticien
     private function afficher($idPraticien) {
         $praticien = $this->praticien->getPraticien($idPraticien);
         $this->genererVue(array('praticien' => $praticien), "details");
+    }
+    
+    public function afficherPraticiensType($typePraticien) {
+        $praticiens = $this->praticien->getPraticiensType($typePraticien);
+        $this->genererVue(array('praticiens' => $praticiens));
     }
 }

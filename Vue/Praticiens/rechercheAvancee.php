@@ -11,16 +11,16 @@ require 'Vue/_Commun/navigation.php';
         <form class="form-horizontal" role="form" action="praticiens/resultat" method="post">
             <div class="form-group">
                 <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a href="praticiens/recherche">Recherche</a></li>
-                    <li><a href="praticiens/rechercheAvancee">Recherche avancée</a></li>
+                    <li><a href="praticiens/recherche">Recherche</a></li>
+                    <li class="active"><a href="praticiens/rechercheAvancee">Recherche avancée</a></li>
                 </ul>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 col-sm-offset-2 control-label">Nom du praticien</label>
+                <label class="col-sm-3 col-sm-offset-2 control-label">Type de praticien</label>
                 <div class="col-sm-5 col-md-4">
                     <select class="form-control" name="id">
                         <?php foreach ($praticiens as $praticien) : ?>
-                            <option value="<?= $this->nettoyer($praticien['idPraticien']) ?>"><?= $this->nettoyer($praticien['nomPraticien']) ?></option>
+                            <option value="<?= $this->nettoyer($praticien['idTypePraticien']) ?>"><?= $this->nettoyer($praticien['libTypePraticien']) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
