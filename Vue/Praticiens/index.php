@@ -1,7 +1,6 @@
 <?php $this->titre = "Praticiens"; ?>
 
 <?php
-$menuMedicaments = true;
 $menuPraticiens = true;
 require 'Vue/_Commun/navigation.php';
 ?>
@@ -20,10 +19,10 @@ require 'Vue/_Commun/navigation.php';
             </thead>
             <?php foreach ($praticiens as $praticien): ?>
                 <tr>
-                    <td><a href="praticiens/details/<?= $this->nettoyer($praticien['id_praticien']) ?>"><?= $this->nettoyer($medicament['nom_praticien']) ?></a></td>
-                    <td><?= $this->nettoyer($praticien['prenom_praticien']) ?></td>
-                    <td><?= $this->nettoyer($praticien['lib_type_praticien']) ?></td>
-                    <td><?= $this->nettoyer($praticien['ville_praticien']) ?></td>
+                    <td><a href="praticiens/details/<?= $this->nettoyer($praticien['idPraticien']) ?>"><?= $this->nettoyer($praticien['nomPraticien']) ?></a></td>
+                    <td><?= $this->nettoyer($praticien['prenomPraticien']) ?></td>
+                    <td><?= $this->nettoyer($praticien['typePraticien']) ?></td>
+                    <td><?= $this->nettoyer($praticien['villePraticien']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

@@ -6,17 +6,17 @@ require_once 'Framework/Modele.php';
 class Praticien extends Modele {
     
     // Morceau de requête SQL incluant les champs de la table médicament
-    private $sqlPraticien = "SELECT lib_type_praticien, nom_praticien, prenom_praticien, adresse_praticien, cp_praticien, ville_praticien, coef_notoriete FROM praticien P JOIN type_praticien TP WHERE P.id_type_praticien = TP.id_type_praticien ";
+    private $sqlPraticien = "SELECT id_praticien as idPraticien, lib_type_praticien as typePraticien, nom_praticien as nomPraticien, prenom_praticien as prenomPraticien, adresse_praticien as adressePraticien, cp_praticien as cpPraticien, ville_praticien as villePraticien, coef_notoriete as coefNotoriete FROM praticien P JOIN type_praticien TP ON P.id_type_praticien = TP.id_type_praticien ";
     
     public function getPraticiens() {
-        $sql = $this->sqlPraticien . ' order by nom_praticien';
+        $sql = $this->sqlPraticien . 'order by nomPraticien';
         $praticiens = $this->executerRequete($sql);
         return $praticiens;
     }
     
     // Renvoie un médicament à partir de son identifiant
     public function getPraticien($idPraticien) {
-        $sql = $this->sqlPraticien . ' where id_praticien=?';
+        $sql = $this->sqlPraticien . 'where P.id_praticien=?';
         $praticien = $this->executerRequete($sql, array($idPraticien));
         if ($praticien->rowCount() == 1)
             return $praticien->fetch();  // Accès à la première ligne de résultat

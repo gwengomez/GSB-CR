@@ -42,4 +42,3 @@ require 'Vue/_Commun/navigation.php';
         </form>
     </div>    
 </div>
-
