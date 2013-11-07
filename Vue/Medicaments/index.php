@@ -2,6 +2,7 @@
 
 <?php
 $menuMedicaments = true;
+$menuPraticiens = true;
 require 'Vue/_Commun/navigation.php';
 ?>
 
