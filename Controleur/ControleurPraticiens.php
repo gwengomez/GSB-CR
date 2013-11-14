@@ -2,15 +2,18 @@
 
 require_once 'Framework/Controleur.php';
 require_once 'Modele/Praticien.php';
+require_once 'Modele/TypePraticien.php';
 
 // Contrôleur des actions liées aux praticiens
 class ControleurPraticiens extends Controleur {
     
     // Objet modèle Praticien
     private $praticien;
+    private $typePraticien;
 
     public function __construct() {
         $this->praticien = new Praticien();
+        $this->typePraticien = new TypePraticien();
     }
 
     // Affiche la liste des praticiens
@@ -32,13 +35,8 @@ class ControleurPraticiens extends Controleur {
     // Affiche l'interface de recherche de praticien
     public function recherche() {
         $praticiens = $this->praticien->getPraticiens();
-        $this->genererVue(array('praticiens' => $praticiens));
-    }
-    
-    // Affiche l'interface de recherche de praticien avancée
-    public function rechercheAvancee() {
-        $praticiens = $this->praticien->getTypesPraticien();
-        $this->genererVue(array('praticiens' => $praticiens));
+        $praticiensType = $this->typePraticien->getTypesPraticien();
+        $this->genererVue(array('praticiens' => $praticiens, 'praticiensType' => $praticiensType));
     }
 
     // Affiche le résultat de la recherche de praticien
@@ -51,13 +49,14 @@ class ControleurPraticiens extends Controleur {
             throw new Exception("Action impossible : aucun praticien défini");
     }
     
-    public function resultatType() {
+    // Affiche la liste des praticiens pour un type
+    public function resultats() {
         if ($this->requete->existeParametre("id")) {
-            $idPraticien = $this->requete->getParametre("id");
-            $this->afficherPraticiensType($idTypePraticien);
+            $typePraticien = $this->requete->getParametre("id");
+            $this->afficherPraticiensType($typePraticien);
         }
         else
-            throw new Exception("Action impossible : aucun type de praticien défini");
+            throw new Exception("Action impossible : aucun praticien défini");
     }
     
     // Affiche les détails sur un praticien
@@ -66,8 +65,12 @@ class ControleurPraticiens extends Controleur {
         $this->genererVue(array('praticien' => $praticien), "details");
     }
     
+    // Affiche la liste des praticiens en fonction du type
     public function afficherPraticiensType($typePraticien) {
-        $praticiens = $this->praticien->getPraticiensType($typePraticien);
-        $this->genererVue(array('praticiens' => $praticiens));
+        if ($typePraticien == 0)
+            $praticiens = $this->praticien->getPraticiens();
+        else
+            $praticiens = $this->praticien->getPraticiensType($typePraticien);
+        $this->genererVue(array('praticiens' => $praticiens, 'typePraticien' => $typePraticien), "index");
     }
 }
