@@ -53,10 +53,19 @@ class ControleurPraticiens extends Controleur {
     public function resultats() {
         if ($this->requete->existeParametre("id")) {
             $typePraticien = $this->requete->getParametre("id");
-            $this->afficherPraticiensType($typePraticien);
         }
+        $nomPraticien = "";
+        if ($this->requete->existeParametre("nom")) {
+            $nomPraticien = $this->requete->getParametre("nom");
+        }
+        $villePraticien = "";
+        if ($this->requete->existeParametre("ville")) {
+            $villePraticien = $this->requete->getParametre("ville");
+        }
+        if ($typePraticien == null)
+            throw new Exception("Action impossible : il manque une restriction");
         else
-            throw new Exception("Action impossible : aucun praticien défini");
+            $this->afficherPraticiensType($nomPraticien, $villePraticien, $typePraticien);
     }
     
     // Affiche les détails sur un praticien
@@ -66,11 +75,11 @@ class ControleurPraticiens extends Controleur {
     }
     
     // Affiche la liste des praticiens en fonction du type
-    public function afficherPraticiensType($typePraticien) {
+    public function afficherPraticiensType($nomPraticien, $villePraticien, $typePraticien) {
         if ($typePraticien == 0)
-            $praticiens = $this->praticien->getPraticiens();
+            $praticiens = $this->praticien->getPraticiens($nomPraticien, $villePraticien);
         else
-            $praticiens = $this->praticien->getPraticiensType($typePraticien);
+            $praticiens = $this->praticien->getPraticiens($nomPraticien, $villePraticien, $typePraticien);
         $this->genererVue(array('praticiens' => $praticiens, 'typePraticien' => $typePraticien), "index");
     }
 }
