@@ -31,5 +31,8 @@
             </li>
             <li class="disabled"><a href="#">Comptes-rendus</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Se déconnecter <span class="glyphicon glyphicon-log-out"></span></a></li>
+          </ul>
     </div>
 </div>

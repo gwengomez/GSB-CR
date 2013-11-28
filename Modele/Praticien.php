@@ -14,12 +14,13 @@ class Praticien extends Modele {
             $praticiens = $this->executerRequete($sql);
         }
         else {
+            $sql = $this->sqlPraticien.'where P.nom_praticien LIKE "%?%" AND P.ville_praticien LIKE "%?%" ';
             if ($typePraticien == null) {
-                $sql = $this->sqlPraticien . 'where P.nom_praticien LIKE "%?%" AND P.ville_praticien LIKE "%?%" ORDER BY nom_praticien';
+                $sql .= 'ORDER BY nom_praticien';
                 $praticiens = $this->executerRequete($sql, array($nomPraticien, $villePraticien));
             }
             else {
-                $sql = $this->sqlPraticien . 'where P.nom_praticien LIKE "%?%" AND P.ville_praticien LIKE "%?%" AND P.id_type_praticien=? ORDER BY nom_praticien';
+                $sql .= 'AND P.id_type_praticien=? ORDER BY nom_praticien';
                 $praticiens = $this->executerRequete($sql, array($nomPraticien, $villePraticien, $typePraticien));
             }
         }

@@ -51,6 +51,7 @@ class ControleurPraticiens extends Controleur {
     
     // Affiche la liste des praticiens pour un type
     public function resultats() {
+        $typePraticien = 0;
         if ($this->requete->existeParametre("id")) {
             $typePraticien = $this->requete->getParametre("id");
         }
@@ -62,7 +63,7 @@ class ControleurPraticiens extends Controleur {
         if ($this->requete->existeParametre("ville")) {
             $villePraticien = $this->requete->getParametre("ville");
         }
-        if ($typePraticien == null)
+        if ($typePraticien == 0)
             throw new Exception("Action impossible : il manque une restriction");
         else
             $this->afficherPraticiensType($nomPraticien, $villePraticien, $typePraticien);
