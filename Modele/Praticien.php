@@ -9,7 +9,7 @@ class Praticien extends Modele {
     private $sqlPraticien = "SELECT id_praticien as idPraticien, lib_type_praticien as typePraticien, nom_praticien as nomPraticien, prenom_praticien as prenomPraticien, adresse_praticien as adressePraticien, cp_praticien as cpPraticien, ville_praticien as villePraticien, coef_notoriete as coefNotoriete FROM praticien P JOIN type_praticien TP ON P.id_type_praticien = TP.id_type_praticien ";
     
     public function getPraticiens($nomPraticien = null, $villePraticien = null, $typePraticien = null) {
-        if ($nomPraticien == null && $villePraticien == null && $typePraticien == null) {
+       if ($nomPraticien == null && $villePraticien == null && $typePraticien == null) {
             $sql = $this->sqlPraticien . 'order by nom_praticien';
             $praticiens = $this->executerRequete($sql);
         }
