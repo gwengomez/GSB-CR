@@ -20,7 +20,7 @@ require 'Vue/_Commun/navigation.php'; ?>
             <div class="form-group">
                 <label class="col-sm-3 col-sm-offset-2 control-label">Date</label>
                 <div class="col-sm-5 col-md-4">
-                    <input name="date" type="date" class="form-control" placeholder="YYYY-MM-DD">
+                    <input name="date" type="date" class="form-control" placeholder="YYYY-MM-DD" required>
                 </div>
             </div>
             <div class="form-group">

@@ -25,24 +25,14 @@ class ControleurComptesrendus extends ControleurSecurise {
         $idPraticien = "";
         if ($this->requete->existeParametre("idPraticien")) {
             $idPraticien = $this->requete->getParametre("idPraticien");
-        }
-        $idVisiteur = "";
-        if ($this->requete->getSession()->existeAttribut("idVisiteur")) {
             $idVisiteur = $this->requete->getSession()->getAttribut("idVisiteur");
-        }
-        $date_rapport = "";
-        if ($this->requete->existeParametre("date")) {
             $date_rapport = $this->requete->getParametre("date");
-        }
-        $bilan = "";
-        if ($this->requete->existeParametre("bilan")) {
             $bilan = $this->requete->getParametre("bilan");
-        }
-        $motif = "";
-        if ($this->requete->existeParametre("motif")) {
             $motif = $this->requete->getParametre("motif");
+            $resultat = $this->compterendu->ajouter($idPraticien, $idVisiteur, $date_rapport, $bilan, $motif);
+            $this->genererVue(array('resultat' => $resultat));
         }
-        $resultat = $this->compterendu->ajouter($idPraticien, $idVisiteur, $date_rapport, $bilan, $motif);
-        $this->genererVue(array('resultat' => $resultat));
+        else
+            throw new Exception("Veuillez passer par le formulaire d'ajout !");
     }
 }
