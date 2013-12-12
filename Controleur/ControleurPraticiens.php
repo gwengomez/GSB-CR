@@ -52,8 +52,8 @@ class ControleurPraticiens extends ControleurSecurise {
     // Affiche la liste des praticiens pour un type
     public function resultats() {
         $typePraticien = 0;
-        if ($this->requete->existeParametre("id")) {
-            $typePraticien = $this->requete->getParametre("id");
+        if ($this->requete->existeParametre("idType")) {
+            $typePraticien = $this->requete->getParametre("idType");
         }
         $nomPraticien = "";
         if ($this->requete->existeParametre("nom")) {
@@ -64,7 +64,7 @@ class ControleurPraticiens extends ControleurSecurise {
             $villePraticien = $this->requete->getParametre("ville");
         }
         if ($typePraticien == 0)
-            throw new Exception("Action impossible : il manque une restriction");
+            $this->afficherPraticiensType($nomPraticien, $villePraticien, null);
         else
             $this->afficherPraticiensType($nomPraticien, $villePraticien, $typePraticien);
     }

@@ -34,7 +34,7 @@ class Compterendu extends Modele {
     }
     
     public function modifier($idRapport, $motif, $bilan) {
-        $sql = "update rapport_visite set bilan='?', motif='?' where id_rapport=?";
+        $sql = "update rapport_visite set bilan=?, motif=? where id_rapport=?";
         $resultat = $this->executerRequete($sql, array($bilan, $motif, $idRapport));
         if ($resultat != null)
             return $resultat;

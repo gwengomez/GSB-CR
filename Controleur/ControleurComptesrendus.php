@@ -66,7 +66,7 @@ class ControleurComptesrendus extends ControleurSecurise {
             $idRapport = $this->requete->getParametre("idCR");
             $motif = $this->requete->getParametre("motif");
             $bilan = $this->requete->getParametre("bilan");
-            $resultat = $this->compterendu->getCompteRendu($idRapport, $motif, $bilan);
+            $resultat = $this->compterendu->modifier($idRapport, $motif, $bilan);
             $this->genererVue(array('$resultat' => $resultat));
         }
         else
