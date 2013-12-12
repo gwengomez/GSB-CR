@@ -1,7 +1,7 @@
 <?php
 
 require_once 'Framework/Controleur.php';
-require_once 'Modele/Visiteur.php';
+require_once 'Modele/Utilisateur.php';
 
 /**
  * Contrôleur gérant la connexion au site
@@ -9,11 +9,11 @@ require_once 'Modele/Visiteur.php';
  */
 class ControleurConnexion extends Controleur
 {
-    private $visiteur;
+    private $utilisateur;
 
     public function __construct()
     {
-        $this->visiteur = new Visiteur();
+        $this->utilisateur = new Utilisateur();
     }
 
     public function index()
@@ -26,10 +26,10 @@ class ControleurConnexion extends Controleur
         if ($this->requete->existeParametre("login") && $this->requete->existeParametre("mdp")) {
             $login = $this->requete->getParametre("login");
             $mdp = $this->requete->getParametre("mdp");
-            if ($this->visiteur->connecter($login, $mdp)) {
-                $visiteur = $this->visiteur->getVisiteur($login, $mdp);
-                $this->requete->getSession()->setAttribut("idVisiteur",$visiteur['idVisiteur']);
-                $this->requete->getSession()->setAttribut("login",$visiteur['login']);
+            if ($this->utilisateur->connecter($login, $mdp)) {
+                $visiteur = $this->utilisateur->getUtilisateur($login, $mdp);
+                $this->requete->getSession()->setAttribut("idVisiteur",$utilisateur['idVisiteur']);
+                $this->requete->getSession()->setAttribut("login",$utilisateur['login']);
                 $this->rediriger("accueil");
             }
             else
